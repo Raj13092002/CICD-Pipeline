@@ -1,0 +1,443 @@
+/* ── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary:       #ff6b35;
+  --primary-dark:  #e85520;
+  --primary-glow:  rgba(255, 107, 53, 0.25);
+  --bg:            #0f0f0f;
+  --surface:       #1a1a1a;
+  --surface2:      #242424;
+  --border:        #2e2e2e;
+  --text:          #f0f0f0;
+  --text-muted:    #888;
+  --radius:        14px;
+  --transition:    0.25s ease;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── Split Layout ─────────────────────────────────────────── */
+.split-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.split-layout.reverse {
+  flex-direction: row-reverse;
+}
+
+/* ── Left Panel ───────────────────────────────────────────── */
+.left-panel {
+  flex: 1;
+  background: linear-gradient(145deg, #1c0900 0%, #2d1200 40%, #0f0f0f 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+  border-right: 1px solid var(--border);
+}
+
+.split-layout.reverse .left-panel {
+  border-right: none;
+  border-left: 1px solid var(--border);
+}
+
+/* decorative circle */
+.left-panel::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,107,53,0.12) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Brand */
+.brand {
+  text-align: center;
+  z-index: 1;
+  margin-bottom: 3rem;
+}
+
+.brand-logo {
+  font-size: 3.5rem;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 0 20px rgba(255,107,53,0.5));
+}
+
+.brand h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.5px;
+}
+
+.brand p {
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Floating food cards */
+.floating-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 1;
+  width: 100%;
+  max-width: 280px;
+}
+
+.float-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,107,53,0.2);
+  border-radius: 50px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  text-align: center;
+  animation: floatUp 3s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0px);   opacity: 0.7; }
+  50%       { transform: translateY(-6px);  opacity: 1;   }
+}
+
+/* Perks list (signup) */
+.perks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  z-index: 1;
+  width: 100%;
+  max-width: 320px;
+}
+
+.perk {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.perk-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.perk strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+
+.perk p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ── Right Panel ──────────────────────────────────────────── */
+.right-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 2rem;
+  background: var(--bg);
+  overflow-y: auto;
+}
+
+/* ── Form Box ─────────────────────────────────────────────── */
+.form-box {
+  width: 100%;
+  max-width: 420px;
+}
+
+.form-header {
+  margin-bottom: 2rem;
+}
+
+.form-header h2 {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.5px;
+}
+
+.form-header p {
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
+}
+
+/* ── Input Groups ─────────────────────────────────────────── */
+.input-group {
+  margin-bottom: 1.1rem;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrap .icon {
+  position: absolute;
+  left: 0.9rem;
+  font-size: 1rem;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.input-wrap input,
+.input-wrap select {
+  width: 100%;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  padding: 0.75rem 0.9rem 0.75rem 2.6rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  font-family: inherit;
+}
+
+.input-wrap input::placeholder {
+  color: #555;
+}
+
+.input-wrap input:focus,
+.input-wrap select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.input-wrap select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.select-wrap::after {
+  content: '▾';
+  position: absolute;
+  right: 0.9rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  font-size: 0.9rem;
+}
+
+/* Two column row */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+/* ── Row Between ──────────────────────────────────────────── */
+.row-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.4rem;
+}
+
+/* ── Checkbox ─────────────────────────────────────────────── */
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.checkbox-label.terms {
+  margin-bottom: 1.4rem;
+}
+
+/* ── Links ────────────────────────────────────────────────── */
+.link {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: color var(--transition);
+}
+
+.link:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.link.bold {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* ── Primary Button ───────────────────────────────────────── */
+.btn-primary {
+  width: 100%;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 0.85rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition), transform 0.1s, box-shadow var(--transition);
+  font-family: inherit;
+  letter-spacing: 0.3px;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 4px 20px var(--primary-glow);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* ── Divider ──────────────────────────────────────────────── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 1.4rem 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Social Buttons ───────────────────────────────────────── */
+.social-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  padding: 0.7rem;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+  font-family: inherit;
+}
+
+.btn-social:hover {
+  border-color: var(--primary);
+  background: var(--surface2);
+}
+
+/* ── Switch Text ──────────────────────────────────────────── */
+.switch-text {
+  text-align: center;
+  margin-top: 1.8rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .split-layout,
+  .split-layout.reverse {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    padding: 2.5rem 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    min-height: auto;
+  }
+
+  .split-layout.reverse .left-panel {
+    border-left: none;
+    border-top: 1px solid var(--border);
+    order: 2;
+  }
+
+  .brand {
+    margin-bottom: 1.5rem;
+  }
+
+  .brand h1 { font-size: 1.8rem; }
+
+  .floating-cards,
+  .perks {
+    max-width: 100%;
+  }
+
+  .right-panel {
+    padding: 2rem 1.2rem;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .social-row {
+    grid-template-columns: 1fr;
+  }
+}
